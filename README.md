@@ -1,4 +1,4 @@
-Hi Bhanu Prakash!
+Hi Kartik Poojari!
 
 # The Intern Management System
 ## Name of Application 
