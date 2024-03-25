@@ -6,7 +6,8 @@ import "../../pages.css/admin.css";
 const UserCard = (props) => {
   const {
     id,
-    personalInfo,
+    firstName,
+    lastName,
     // education,
     // workExperienceInfo,
     // socialMedia,
@@ -23,7 +24,7 @@ const UserCard = (props) => {
         <img src={user} className="" alt="user" />
         {/* <h5 class="card-title">{personalInfo.email}</h5> */}
         <p class="card-text">
-          {personalInfo.firstName + " " + personalInfo.lastName}
+          {firstName + " " + lastName}
         </p>
         <i
           className="fa fa-trash-o"

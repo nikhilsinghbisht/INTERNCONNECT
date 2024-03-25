@@ -65,7 +65,7 @@ function Contact() {
 
           <h2 class="mode">Our Address</h2>
 
-          <p class="mode">3rd Floor, The Corenthum, India Accelerator, Sector 62, Noida, Uttar Pradesh 201301</p>
+          <p class="mode">Lorem ipsum dolor sit amet.</p>
         </div>
         <div class="container__elem">
           <div class="elem__block">
@@ -78,7 +78,7 @@ function Contact() {
           </div>
 
           <h2 class="mode">CALL US</h2>
-          <p class="mode">+91  7498232799</p>
+          <p class="mode">Lorem ipsum dolor sit amet.</p>
         </div>
         <div class="container__elem">
           <div class="elem__block">
@@ -91,7 +91,7 @@ function Contact() {
           </div>
           <h2 class="mode">WRITE US</h2>
           <p class="mode">
-          tech@entrepreneurshipnetwork.net<br></br>We will respond to your email inquiry within 24 hours.
+            We will respond to your email inquiry within 24 hours.
           </p>
         </div>
         <div class="container__elem">
@@ -105,7 +105,7 @@ function Contact() {
           </div>
 
           <h2 class="mode">FAQ</h2>
-          <p class="mode">Message us if you have any query</p>
+          <p class="mode">Lorem ipsum dolor sit amet.</p>
         </div>
       </div>
       <div class="touch">

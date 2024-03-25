@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const Joi = require("joi");
 const { Schema } = require("mongoose");
-JoiObjectId = require("joi-objectid")(Joi);
+const JoiObjectId = require("joi-objectid")(Joi);
 
 const jobSchema = new mongoose.Schema({
   job_id: {
@@ -29,8 +29,9 @@ const jobSchema = new mongoose.Schema({
     required: true,
   },
   company_id: {
-    type: Schema.Types.ObjectId,
-    ref: "Company",
+    // type: Schema.Types.ObjectId,
+    // ref: "Company",
+    type: String,
     required: true,
   },
 });

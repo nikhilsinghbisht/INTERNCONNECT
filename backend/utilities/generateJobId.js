@@ -15,7 +15,7 @@ async function generateJobId() {
     const existingJob = await Job.findOne({ jobId });
 
     if (!existingJob) {
-      return JobId;
+      return jobId;
     }
   }
 }

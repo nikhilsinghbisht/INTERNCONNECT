@@ -20,7 +20,7 @@ function SignUp() {
     console.log(event.target.value);
     try {
       const response = await axios.post(
-        "/user/register/email",
+        "/user/register/",
         {
           firstName,
           lastName,
@@ -28,7 +28,9 @@ function SignUp() {
           password,
         }
       );
-      alert("Check your inbox to verify!");
+      // alert("Check your inbox to verify!");
+      localStorage.setItem('token', response.data.authtoken)
+      navigate("/")
     } catch (error) {
       alert(error);
       console.log(error);

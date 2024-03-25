@@ -66,16 +66,14 @@ router.post("/", isAuthenticated, (req, res) => {
 // Create a new job
 router.post("/create", isAuthenticated, async (request, response) => {
   try {
+    // Generate job id using generate job id function
+    let jobId = await generateJobId();
+    request.body.job_id = jobId
     const { error } = await jobValidation(request.body);
     if (error) {
       console.log(error);
       return response.status(400).json({ error: error.details[0].message });
     }
-    // Generate job id using generate job id function
-    let jobId = await generateJobId();
-
-    request.body.jobId = jobId;
-    console.log(request.body);
 
     const newJob = new Job(request.body);
     const savedJob = await newJob.save();

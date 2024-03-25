@@ -19,10 +19,17 @@ const Navbar = () => {
   useEffect(() => {
     const fetchLoggedInUser = async () => {
       try {
-        const response = await fetch("/user/login/verify");
+        const response = await fetch("http://localhost:5500/user/login/verify", {
+          headers: {
+            "Content-Type": "application/json",
+            "authtoken": localStorage.getItem('auth-token')
+          }
+        });
         if (response.ok) {
           const data = await response.json();
           setLoggedInUser(data.user);
+        } else {
+          console.log("verification failed")
         }
       } catch (error) {
         console.log("Error fetching logged-in user:", error);
@@ -35,11 +42,14 @@ const Navbar = () => {
   const handleLogout = async () => {
     try {
       alert("Pressed logout button");
-      const response = await axios.post("/user/logout");
-      if (response.ok) {
-        setLoggedInUser(null);
-        navigate("/user/login");
-      }
+      // const response = await axios.post("/user/logout");
+      // if (response.ok) {
+      //   setLoggedInUser(null);
+      //   navigate("/user/login");
+      // }
+      localStorage.clear()
+      setLoggedInUser(null)
+      navigate('/user/login')
     } catch (error) {
       console.log("Error logging out:", error);
     }

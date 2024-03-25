@@ -6,21 +6,30 @@ const UserList = (props) => {
     props.getUserId(id);
   };
 
-  const renderUserList = props.users.map((user) => {
-    return (
-      <UserCard
-        user={user}
-        deleteUser={deleteUserHandler}
-        setCurrentUser={props.setCurrentUser}
-        key={user.id}
-      />
-    );
-  });
+  // const renderUserList = props.users.map((user) => {
+  //   return (
+  //     <UserCard
+  //       user={user}
+  //       deleteUser={deleteUserHandler}
+  //       setCurrentUser={props.setCurrentUser}
+  //       key={user.id}
+  //     />
+  //   );
+  // });
 
   return (
     <>
       <h3>User List</h3>
-      <div>{renderUserList}</div>
+      {props.users.map((user) => {
+        return (
+          <UserCard
+            user={user}
+            deleteUser={deleteUserHandler}
+            setCurrentUser={props.setCurrentUser}
+            key={user.id}
+          />
+        );
+      })}
     </>
   );
 };

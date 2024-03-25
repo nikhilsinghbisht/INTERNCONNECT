@@ -12,20 +12,21 @@ function Admin() {
   const [view, setView] = useState(null);
 
   // GET all users
-  const retriveUsers = async () => {
-    const response = await api.get("/users");
-    return response.data;
-  };
+  // const retriveUsers = async () => {
+  //   const response = await api.get("/user");
+  //   console.log(response.data)
+  //   return response.data;
+  // };
 
   // ADD user
-  const addUserHandler = async (user) => {
-    const request = {
-      id: user.id,
-      ...user,
-    };
+  const createUserHandler = async (user) => {
+    // const request = {
+    // id: user.id,
+    // ...user,
+    // };
 
-    const response = await api.post("/users", request);
-    setUsers([...users, response.data]);
+    // const response = await api.post("/users", request);
+    // setUsers([...users, response.data]);
   };
 
   // DELETE user
@@ -40,88 +41,88 @@ function Admin() {
 
   // update user
   const updateUserHandler = async (user) => {
-    const response = await api.put(`/users/${user.id}`, user);
-    const { id } = response.data;
-    setUsers(
-      users.map((user) => {
-        return user.id === id ? { ...response.data } : user;
-      })
-    );
+    // const response = await api.put(`/users/${user.id}`, user);
+    // const { id } = response.data;
+    // setUsers(
+    // users.map((user) => {
+    // return user.id === id ? { ...response.data } : user;
+    // })
+    // );
   };
 
   useEffect(() => {
     const getAllUsers = async () => {
-      const allUsers = await retriveUsers();
+      // const allUsers = await retriveUsers();
+      const response = await api.get("/user");
+      const allUsers = response.data.users
       if (allUsers) setUsers(allUsers);
+      // console.log(response.data)
+      // setUsers(response.data.users)
     };
 
     getAllUsers();
   }, []);
 
   const retriveJobs = async () => {
-    const response = await api.get("/jobs");
-    return response.data;
+    // const response = await api.get("/jobs");
+    // return response.data;
   };
 
   // ADD job
   const createJobHandler = async (job) => {
-    const request = {
-      id: job.id,
-      ...job,
-    };
+    // const request = {
+    //   id: job.id,
+    //   ...job,
+    // };
 
-    const response = await api.post("/jobs", request);
-    setJobs([...jobs, response.data]);
+    // const response = await api.post("/jobs", request);
+    // setJobs([...jobs, response.data]);
   };
 
   // DELETE job
   const removeJobHandler = async (id) => {
-    await api.delete(`/jobs/${id}`);
-    const newJobsList = jobs.filter((job) => {
-      return job.id !== id;
-    });
+    // await api.delete(`/jobs/${id}`);
+    // const newJobsList = jobs.filter((job) => {
+    //   return job.id !== id;
+    // });
 
-    setJobs(newJobsList);
+    // setJobs(newJobsList);
   };
 
   useEffect(() => {
-    const getAllJobs = async () => {
-      const allJobs = await retriveJobs();
-      if (allJobs) setJobs(allJobs);
-    };
-    getAllJobs();
+    // const getAllJobs = async () => {
+    //   const allJobs = await retriveJobs();
+    //   if (allJobs) setJobs(allJobs);
+    // };
+    // getAllJobs();
   }, []);
-
-  const renderView = () => {
-    if (view === "users") {
-      return (
-        <AdminDashboardUser
-          users={users}
-          removeUserHandler={removeUserHandler}
-          createUserHandler={addUserHandler}
-        />
-      );
-    } else if (view === "jobs") {
-      return (
-        <AdminDashboardJob
-          jobs={jobs}
-          createJobHandler={createJobHandler}
-          removeJobHandler={removeJobHandler}
-        />
-      );
-    } else if (view === null) {
-      return <h3>Admin Dashboard</h3>;
-    }
-  };
 
   return (
     <>
       {/* <Sidebar /> */}
-      <div className="mt-5">
+      <div className="mt-5disable" style={{ marginTop: "5rem" }}>
+        <button onClick={() => setView(null)}>Home</button>
+        {/* <button onClick={() => { handleUsers() }}>Users</button> */}
         <button onClick={() => setView("users")}>Users</button>
         <button onClick={() => setView("jobs")}>Jobs</button>
-        <button onClick={() => setView(null)}>Home</button>
-        {renderView()}
+        {/* {renderView()} */}
+        {/* {view === "users" && <div>Users</div>} */}
+        {view === "users" && <AdminDashboardUser
+          users={users}
+          removeUserHandler={removeUserHandler}
+          createUserHandler={createUserHandler}
+        />}
+
+        {view === "jobs" && <AdminDashboardJob
+          jobs={jobs}
+          createJobHandler={createJobHandler}
+          removeJobHandler={removeJobHandler}
+        />}
+        {/* {view === "jobs" && <AdminDashboardJob
+          jobs={jobs}
+          createJobHandler={createJobHandler}
+          removeJobHandler={removeJobHandler}
+        />} */}
       </div>
     </>
   );

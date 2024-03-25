@@ -21,7 +21,7 @@ const companyValidationSchema = async (Company)=> {
         companyId: Joi.string().required(),
         aboutCompany: Joi.string().required(),
         websiteURL: Joi.string().required().uri().message('Invalid website URL'),
-        logoURL: Joi.string().required().uri().message('Invalid logo URL'),
+        // logoURL: Joi.string().required().uri().message('Invalid logo URL'),
         address: Joi.object({
           street: Joi.string(),
           city: Joi.string(),
@@ -29,12 +29,12 @@ const companyValidationSchema = async (Company)=> {
           country: Joi.string(),
           zipCode: Joi.string(),
         }),
-        socialMedia: Joi.object({
-          twitter: Joi.string().uri().message('Invalid Twitter URL'),
-          linkedin: Joi.string().uri().message('Invalid LinkedIn URL'),
-          facebook: Joi.string().uri().message('Invalid Facebook URL'),
-          instagram: Joi.string().uri().message('Invalid Instagram URL'),
-        }),
+        // socialMedia: Joi.object({
+        //   twitter: Joi.string().uri().message('Invalid Twitter URL'),
+        //   linkedin: Joi.string().uri().message('Invalid LinkedIn URL'),
+        //   facebook: Joi.string().uri().message('Invalid Facebook URL'),
+        //   instagram: Joi.string().uri().message('Invalid Instagram URL'),
+        // }),
     });
 
     return schema.validate(Company);

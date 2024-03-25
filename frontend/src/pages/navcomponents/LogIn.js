@@ -5,7 +5,7 @@ import React, { useState } from "react";
 import "../../componentsCss/logInpage.css";
 import { Link, useNavigate } from "react-router-dom";
 
-const { REACT_APP_SERVER_URL } = process.env;
+// const { REACT_APP_SERVER_URL } = process.env;
 
 function LogIn() {
   const [email, setEmail] = useState("");
@@ -18,15 +18,18 @@ function LogIn() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await axios.post("/user/login", {
-        username: email,
-        password: password,
+      const response = await axios.post("http://localhost:5500/user/login", {
+        email,
+        password,
       });
 
-      console.log(response.data);
-      const accessToken = response?.data?.accessToken;
-      const roles = response?.data?.roles;
-      navigate("/home");
+      if (response.status === 200) {
+        const accessToken = response?.data?.authtoken;
+        const roles = response?.data?.roles;
+        localStorage.setItem('auth-token', accessToken)
+        // navigate("/home");
+        navigate("/");
+      }
     } catch (error) {
       console.log(error);
       alert(error);

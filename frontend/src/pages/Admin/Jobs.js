@@ -11,7 +11,8 @@ function Jobs() {
 
   // GET all jobs
   const retriveJobs = async () => {
-    const response = await api.get("/jobs");
+    // const response = await api.get("/jobs");
+    const response = await api.get("/jobs/show");
     return response.data;
   };
 

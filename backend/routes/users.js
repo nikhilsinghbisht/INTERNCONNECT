@@ -1,57 +1,81 @@
 const mongoose = require("mongoose");
-const bcryt = require("bcrypt");
+const bcrypt = require("bcrypt");
 const express = require("express");
 const Joi = require("joi");
 const { User, validate } = require("../models/user");
 const router = express.Router();
+const isAuthenticated = require('../middlewares/authCheck')
 const passport = require("passport");
 const passportLocal = require("passport-local");
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
+const jwt = require('jsonwebtoken');
+const fetchuser = require("../middlewares/fetchuser");
 
-router.get("/login", (request, response) => {
+router.post("/login", passport.authenticate("local"), (request, response, next) => {
+  // STEP 1: Check if user is already authenticated
+  console.log("Login request processed");
   if (request.isAuthenticated()) {
-    return response.redirect(process.env.REACT_APP_SERVER_URL + "/");
-  }
-  return response.redirect("user/login");
-});
-
-router.post(
-  "/login",
-  passport.authenticate("local-login"),
-  (request, response, next) => {
-    // STEP 1: Check if user is already authenticated
-    console.log("Login request processed");
-    if (request.isAuthenticated()) {
-      console.log("You are authorised");
-      return response.redirect("/");
+    console.log("You are authorised");
+    const data = {
+      user: {
+        id: request.user.id
+      }
     }
-    return response.redirect("/user/login");
+    const authtoken = jwt.sign(data, 'cat')
+    return response.status(200).json({ authtoken });
   }
-);
+  return response.status(400).json("Login Failed!");
+});
 
-// Define the login verification route
-router.get("/login/verify", (request, response) => {
-  console.log("Verifying login status");
-  console.log("Status : ", request.isAuthenticated());
-  console.log(request.user);
-  if (request.isAuthenticated()) {
-    // STEP 1: If User is authenticated, return the logged-in user object
-    return response.json({ user: request.user });
-  } else {
-    // User is not authenticated, so return error
-    return response.status(401).json({ message: "User is not logged in" });
+router.get('/login/verify', fetchuser, async (request, response) => {
+  console.log("verifying")
+  const { id } = request.user
+  const user = await User.findById(id)
+  response.status(200).json({ user })
+})
+
+router.post("/register", async (req, res) => {
+  let success = false
+  try {
+    let user = await User.findOne({ email: req.body.email })
+    // console.log(user)
+    if (user) {
+      return res.status(400).json({ success, error: "Sorry a User with this email already exists" })
+    }
+    const salt = await bcrypt.genSalt(10)
+    const secPass = await bcrypt.hash(req.body.password, salt)
+
+    //Create a new User
+    user = await User.create({
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
+      password: secPass,
+      email: req.body.email
+    })
+    const data = {
+      user: {
+        id: user.id
+      }
+    }
+    const authtoken = jwt.sign(data, "cat")
+    //res.json(user)
+    success = true;
+    res.json({ success, authtoken })
+  }
+  catch (error) {
+    console.error(error.message);
+    res.status(500).send("Internal Server Error!");
   }
 });
 
-router.get("/register", async (request, response) => {
-  if (request.isAuthenticated()) {
-    return response.redirect(
-      process.env.REACT_APP_SERVER_URL + "/user/profile"
-    );
-  } else {
-    response.redirect(process.env.REACT_APP_SERVER_URL + "/user/register");
+router.get('/', async (request, response) => {
+  try {
+    const users = await User.find()
+    response.status(200).json({ users })
+  } catch (error) {
+    response.status(400).send("Some Error occured")
   }
-});
+})
 
 router.get("/profile", (request, response) => {
   console.log("hello profile");
@@ -65,12 +89,10 @@ router.get("/profile", (request, response) => {
   }
 });
 
-router.post(
-  "/register/email",
-  passport.authenticate("magiclink", {
-    action: "requestToken",
-    failureRedirect: process.env.REACT_APP_SERVER_URL + "/user/register",
-  }),
+router.post("/register/email", passport.authenticate("magiclink", {
+  action: "requestToken",
+  failureRedirect: process.env.REACT_APP_SERVER_URL + "/user/register",
+}),
   (request, response, next) => {
     console.log("Signup request received.");
     response.redirect("/user/register/email/check");
@@ -84,12 +106,10 @@ router.get("/register/email/check", function (request, response, next) {
 });
 
 // Verify Registered Email
-router.get(
-  "/register/email/verify",
-  passport.authenticate("magiclink", {
-    successReturnToOrRedirect: "/",
-    failureRedirect: process.env.REACT_APP_SERVER_URL + "/user/register",
-  })
+router.get("/register/email/verify", passport.authenticate("magiclink", {
+  successReturnToOrRedirect: "/",
+  failureRedirect: process.env.REACT_APP_SERVER_URL + "/user/register",
+})
 );
 
 router.post("/logout", (request, response) => {

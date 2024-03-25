@@ -24,14 +24,14 @@ const companySchema = new mongoose.Schema({
       message: 'Invalid website URL',
     },
   },
-  logoURL: {
-    type: String,
-    required: true,
-    validate: {
-      validator: (value) => isURL(value),
-      message: 'Invalid logo URL',
-    },
-  },
+  // logoURL: {
+  //   type: String,
+  //   required: true,
+  //   validate: {
+  //     validator: (value) => isURL(value),
+  //     message: 'Invalid logo URL',
+  //   },
+  // },
   address: {
     street: String,
     city: String,
@@ -39,36 +39,36 @@ const companySchema = new mongoose.Schema({
     country: String,
     zipCode: String,
   },
-  socialMedia: {
-    twitter: {
-      type: String,
-      validate: {
-        validator: (value) => isURL(value),
-        message: 'Invalid Twitter URL',
-      },
-    },
-    linkedin: {
-      type: String,
-      validate: {
-        validator: (value) => isURL(value),
-        message: 'Invalid LinkedIn URL',
-      },
-    },
-    facebook: {
-      type: String,
-      validate: {
-        validator: (value) => isURL(value),
-        message: 'Invalid Facebook URL',
-      },
-    },
-    instagram: {
-      type: String,
-      validate: {
-        validator: (value) => isURL(value),
-        message: 'Invalid Instagram URL',
-      },
-    },
-  },
+  // socialMedia: {
+  //   twitter: {
+  //     type: String,
+  //     validate: {
+  //       validator: (value) => isURL(value),
+  //       message: 'Invalid Twitter URL',
+  //     },
+  //   },
+  // linkedin: {
+  //   type: String,
+  //   validate: {
+  //     validator: (value) => isURL(value),
+  //     message: 'Invalid LinkedIn URL',
+  //   },
+  // },
+  // facebook: {
+  //   type: String,
+  //   validate: {
+  //     validator: (value) => isURL(value),
+  //     message: 'Invalid Facebook URL',
+  //   },
+  // },
+  // instagram: {
+  //   type: String,
+  //   validate: {
+  //     validator: (value) => isURL(value),
+  //     message: 'Invalid Instagram URL',
+  //   },
+  // },
+  // },
 });
 
 // Create the Company model

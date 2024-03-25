@@ -71,7 +71,7 @@ function Footerbar() {
                 </div>
                 <ul>
                   <li>
-                    <a href="/">Home</a>
+                    <a href="/home">Home</a>
                   </li>
                   <li>
                     <a href="/aboutus">About</a>
@@ -89,7 +89,7 @@ function Footerbar() {
                     <a href="#">Guidelines</a>
                   </li>
                   <li>
-                    <a href="jobs">Job Search</a>
+                    <a href="#">Job Search</a>
                   </li>
                   <li>
                     <a href="/addjob">Post a Job</a>
