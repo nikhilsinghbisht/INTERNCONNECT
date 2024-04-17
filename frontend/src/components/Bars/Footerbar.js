@@ -86,7 +86,7 @@ function Footerbar() {
                     <a href="#">Career Advice</a>
                   </li>
                   <li>
-                    <a href="#">Guidelines</a>
+                    <a href="/guidelines">Guidelines</a>
                   </li>
                   <li>
                     <a href="#">Job Search</a>

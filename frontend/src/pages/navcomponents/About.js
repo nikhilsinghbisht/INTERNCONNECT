@@ -39,19 +39,19 @@ function about() {
         </div>
       </section>
 
-      <section class="m-5">
-        <div class="service">
-          <div class="row d-flex justify-content-center">
-            <div class="col-md-8 pb-40 header-text">
+      <section className="m-5">
+        <div className="service">
+          <div className="row d-flex justify-content-center">
+            <div className="col-md-8 pb-40 header-text">
               <h2>Why InternConnect</h2>
               <p> Lorem ipsum dolor</p>
             </div>
           </div>
-          <div class="row">
-            <div class="col-lg-4 col-md-6">
-              <div class="single-service">
+          <div className="row">
+            <div className="col-lg-4 col-md-6">
+              <div className="single-service">
                 <h4>
-                  <span class="lnr lnr-user"></span> Lorem ipsum
+                  <span className="lnr lnr-user"></span> Lorem ipsum
                 </h4>
                 <p>
                   Lorem ipsum dolor sit amet, consectetur adipisicing elit.

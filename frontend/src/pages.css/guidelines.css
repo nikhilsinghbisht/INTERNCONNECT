@@ -1,0 +1,41 @@
+body {
+  box-sizing: border-box;
+}
+
+section {
+  padding: 20px;
+}
+
+p {
+  color: #555;
+  font-size: 15px;
+  line-height: 1.6;
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.guidelines-list {
+  color: #555;
+  font-size: 15px;
+  margin-bottom: 20px;
+  line-height: 1.6;
+  margin-left: 10px;
+  text-align: left;
+}
+
+.guidelines-category {
+  margin-bottom: 10px;
+}
+
+.guidelines-list li {
+  margin-bottom: 10px;
+}
+
+.guidelines-sublist {
+  margin-top: 10px;
+  margin-left: 20px;
+}
+
+.guidelines-main {
+  font-weight: bold;
+}

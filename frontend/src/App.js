@@ -25,6 +25,7 @@ import Profile from "./components/Employer/Profile";
 import CreateTask from "./pages/Tasks/CreateTask";
 import ViewTask from "./pages/Tasks/ViewTask";
 import Tasks from "./pages/Tasks/Tasks";
+import Guidelines from "./pages/navcomponents/Guidelines";
 
 function App() {
   const { user } = useContext(AuthContext);
@@ -44,6 +45,7 @@ function App() {
               <Route path="/user/register" element={<SignUp />} />
               <Route path="/contactus" element={<Contact />} />
               <Route path="/aboutus" element={<About />} />
+              <Route path="/guidelines" element={<Guidelines />} />
               {/* <Route exact path="/profile">
                 {userType() === "Employee" ? (
                   <Profile />
