@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import "../../componentsCss/employerstyles/addjob.css";
 const AddJob = () => {
   const [jobDetails, setJobDetails] = useState({
-    title: "",
+    role_name: "",
     skillsets: [],
     jobType: "",
-    duration: 0,
+    duration: "",
     salary: "",
     deadline: "",
     maxApplicants: "",
@@ -21,7 +21,7 @@ const AddJob = () => {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    fetch("", {
+    fetch("http://localhost:5500/jobs/create", {
       method: "POST",
       headers: {},
       body: JSON.stringify(jobDetails),
@@ -51,7 +51,7 @@ const AddJob = () => {
                 type="text"
                 placeholder="Job role"
                 value={jobDetails.title}
-                onChange={(event) => handleInput("title", event.target.value)}
+                onChange={(event) => handleInput("role_name", event.target.value)}
               />
             </div>
             <div className="form-row">

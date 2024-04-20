@@ -56,10 +56,10 @@ app.use(flash());
 
 passport.use(new LocalStrategy({ usernameField: 'email' }, async (email, password, done) => {
     try {
-        console.log("hiii")
-        console.log(email)
+        console.log("hiii You are Logged In...")
+        // console.log(email)
         const user = await User.findOne({ email });
-        console.log(user)
+        // console.log(user)
         if (!user) return done(null, false)
 
         // const salt = await bcrypt.genSalt(10)
@@ -99,6 +99,8 @@ app.use("/user", user);
 app.use("/auth", auth);
 app.use("/company", company);
 app.use("/jobs", job);
+
+// .use("/user",auth,user)
 
 // app.post('/', (req, res) => {
 //     res.redirect('/');
