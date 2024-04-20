@@ -28,7 +28,7 @@ router.post("/login", passport.authenticate("local"), (request, response, next) 
 });
 
 router.get('/login/verify', fetchuser, async (request, response) => {
-  console.log("verifying")
+  console.log("verifying Karn")
   const { id } = request.user
   const user = await User.findById(id)
   response.status(200).json({ user })
@@ -70,8 +70,11 @@ router.post("/register", async (req, res) => {
 
 router.get('/', async (request, response) => {
   try {
+    // console.log("karn");
     const users = await User.find()
+    // console.log("Kumar");
     response.status(200).json({ users })
+    // console.log("YUP");
   } catch (error) {
     response.status(400).send("Some Error occured")
   }
@@ -79,7 +82,7 @@ router.get('/', async (request, response) => {
 
 router.get("/profile", (request, response) => {
   console.log("hello profile");
-  console.log("Authenticated user : ", request.user.email);
+  console.log("Authenticated user : ", request.user);
   if (request.isAuthenticated()) {
     return response.redirect(
       process.env.REACT_APP_SERVER_URL + "/user/Profile"

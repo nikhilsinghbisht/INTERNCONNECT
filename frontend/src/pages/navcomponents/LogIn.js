@@ -96,7 +96,7 @@ function LogIn() {
                       <div class="line"></div>
                     </div>
                     <div class="social-icons">
-                      <a href="http://localhost:8080/auth/google/register">
+                      <a href="http://localhost:5500/auth/google/register">
                         <button aria-label="Login with Google" class="icon ">
                           <div className="g_icon">
                             <i className="fa fa-google"></i>

@@ -10,9 +10,9 @@ const transporter = nodemailer.createTransport({
 
 const options = {
     from: process.env.DEV_EMAIL_ID,
-    to: "bhanu.putta1999@gmail.com",
+    to: "karn03.ugec20@iiitranchi.ac.in",
     subject: "Test email for intern connect",
-    text: "Hello Bhanu, the email service is working perfect."
+    text: "Hello Karn, the email service is working perfect."
 };
 
 transporter.sendMail(options, (err, info)=>{

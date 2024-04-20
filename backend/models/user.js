@@ -207,7 +207,7 @@ passport.use(new GoogleStrategy(
     {
         clientID: process.env.GOOGLE_CLIENT_ID,
         clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-        callbackURL: process.env.GOOGLE_CALLBACK_URL,
+        callbackURL: "http://localhost:5500/auth/google/register",
         userProfileURL: "https://www.googleapis.com/oauth2/v3/userinfo",
         state: true,
         scope: ['profile', 'email']
@@ -215,7 +215,7 @@ passport.use(new GoogleStrategy(
     async (accessToken, refreshToken, profile, done) => {
         // console.log(profile);
         // Find if user with this google already exists
-        User.findOne({ email: profile.emails[0].value }).exec()
+        await User.findOne({ email: profile.emails[0].value }).exec()
             .then(async user => {
                 if (!user) {
                     // User does not exist, create new user.
@@ -229,7 +229,10 @@ passport.use(new GoogleStrategy(
                         profilePhoto: profile.photos[0].value,
                         email_verified: 1,
                         source: 'Google',
+                        
                     });
+                    // console.log("Yup Karn")
+                    // console.log(user.lastName);
 
                     console.log("New User created");
                     user.save()
